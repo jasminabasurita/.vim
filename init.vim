@@ -29,6 +29,7 @@ if has('python3')
   Plug 'ncm2/ncm2-bufword'
   " Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
   Plug 'ncm2/ncm2-cssomni'
+  Plug 'kburdett/vim-nuuid'
 
   autocmd BufEnter * call ncm2#enable_for_buffer()
   set completeopt=noinsert,menuone,noselect
@@ -43,14 +44,26 @@ let g:AutoPairsMultilineClose = 0 " disable line jumping for closing pair
 let g:AutoPairsMapCR = 1
 
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-repeat'
 Plug 'jasminabasurita/NeoDim', {'frozen': 1}
 Plug 'dracula/vim' " , {'commit': '0743d3d7b3769d012827bc8d1e5375164791cc2f'}
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}
 Plug 'mxw/vim-jsx'
+Plug 'leafgarland/typescript-vim'
+Plug 'digitaltoad/vim-pug'
 Plug 'farfanoide/vim-kivy'
-Plug 'mileszs/ack.vim'
-nnoremap <leader>ag :Ack!<space>
-let g:ackprg = 'ag --nogroup --nocolor --column'
+Plug 'raghur/vim-ghost', {'do': ':GhostInstall'}
+Plug 'romainl/vim-qf'
+Plug 'yssl/QFEnter'
+let g:qfenter_keymap = {}
+let g:qfenter_keymap.vopen = ['<C-v>']
+let g:qfenter_keymap.hopen = ['<C-CR>', '<C-s>', '<C-x>']
+let g:qfenter_keymap.topen = ['<C-t>']
+Plug 'mhinz/vim-grepper'
+nmap gs <plug>(GrepperOperator)
+vmap gs <plug>(GrepperOperator)
+nnoremap <leader>ag :Grepper -tool ag<cr>
+nnoremap <leader>rg :Grepper -tool rg<cr>
 
 Plug 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_map = '<c-p>'
@@ -99,7 +112,7 @@ highlight Difftext ctermbg=NONE guibg=NONE
 " vim-markdown-composer
 let g:markdown_composer_syntax_theme='dracula'
 let g:markdown_composer_autostart=0
-nnoremap <C-m> :ComposerStart<CR>
+nnoremap <leader>mc :ComposerStart<CR>
 
 " Indentation Guides
 let g:indent_guides_enable_on_vim_startup = 1
@@ -117,7 +130,7 @@ let g:airline#extensions#ale#enabled=1
 " " Save and Reload Folds!
 autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent! loadview
- 
+
 " NERDTREE
 " NERDTree shortcut
 nnoremap <F1> :e.<CR>
@@ -137,6 +150,7 @@ let g:NERDTreeHighlightFolders = 1 " enables folder icon highlighting using exac
 let g:NERDTreeLimitedSyntax=1
 
 " Built in Vim Settings
+set colorcolumn=80    " add guide for long lines
 set cursorline    " highlight current line
 set hidden        " allow for modified buffers to be in the background, makes buffers feel more like tabs
 set tabstop=2     " show existing tab with 2 spaces width
@@ -162,9 +176,12 @@ set ignorecase      " Ignore case in search pattern
 set smartcase       " ^ But be smart about it
 set noshowmode
 set clipboard+=unnamedplus " set system clipboard as the default register
-set guicursor=n:blinkon1
+set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+  \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+  \,sm:block-blinkwait175-blinkoff150-blinkon175
 set diffopt=vertical,filler
 set inccommand=nosplit " highlight substitutions
+set nofixendofline " no new line on save
 
 " ALE CONIGURATIONS
 let g:ale_linters = {
@@ -176,7 +193,7 @@ let g:ale_linters = {
 \   'scss': ['stylelint'],
 \   'vim': ['vint']
 \}
-let g:ale_fixers = { 
+let g:ale_fixers = {
 \   'javascript': ['eslint'],
 \   'python': ['autopep8', 'yapf'],
 \   'css': ['stylelint'],
@@ -206,7 +223,7 @@ highlight clear ALEErrorSign
 highlight clear ALEWarningSign
 highlight ALEErrorSign guibg='#5F0000' gui=underline
 highlight ALEWarningSign guifg='#F1FA8C'
-let g:ale_fix_on_save = 1
+let g:ale_fix_on_save = 0
 noremap <C-F>  :ALEFix <CR>
 
 " My Key Mappings
@@ -258,7 +275,11 @@ onoremap K 4k
 " Add Punctuation to end of line or line break
 nnoremap <leader><CR> i<CR><Esc>
 " Flatten
-nnoremap F J
+nnoremap <leader>f J
+vnoremap <leader>f J
+" Break by space
+vnoremap <leader>b :s/\s/\r/g<CR>:noh<CR>
+
 nnoremap <leader>; $a;<Esc>
 nnoremap <leader>, $a,<Esc>
 " Add Symbol after Cursor
@@ -267,6 +288,11 @@ nnoremap <leader>) a)<Esc>
 nnoremap <leader>] a]<Esc>
 nnoremap <leader>" a"<Esc>
 nnoremap <leader>' a'<Esc>
+"spaces in brackets
+nnoremap <leader>{ vi{<Esc>`>a <Esc>`<i <Esc>
+nnoremap <leader>[ vi[<Esc>`>a <Esc>`<i <Esc>
+nnoremap <leader>( vi(<Esc>`>a <Esc>`<i <Esc>
+vnoremap <leader>[ <Esc>`>a <Esc>`<i <Esc>
 " Surround Selection in /* */
 vnoremap <leader>/ <Esc>`>a*/<Esc>`<i/*<Esc>
 " React comment
@@ -280,11 +306,12 @@ nnoremap <leader>n :cn<CR>
 nnoremap <leader>p :cp<CR>
 
 " My Abbreviations
-iabbrev @@ jasminejacquelin@gmail.com
+iabbrev @@ jasminajacquelina@gmail.com
 iabbrev ireact import React from 'react'
 iabbrev ireactrouter import {  } from 'react-router-dom'
 iabbrev iaxios import axios from 'axios'
 iabbrev rrouter const router = require('express').Router()
+iabbrev tapx x => (console.log(x), x),
 
 " Get Rid of Git Gutters key mappings
 let g:gitgutter_map_keys = 0
@@ -298,5 +325,7 @@ let g:jsx_ext_required = 0
 " Save Files With Root Priveleges
 command! -nargs=0 Sw w !sudo tee % > /dev/null
 
-" Stop recording
-nnoremap q <Nop> 
+command! -bar NoCRLF :set ff=unix
+
+command! -bar TrailX :%s/\s\+$//e
+nnoremap  <silent> <F3> :TrailX<cr>
