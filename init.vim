@@ -27,7 +27,6 @@ if has('python3')
   Plug 'ncm2/ncm2'
   Plug 'ncm2/ncm2-path'
   Plug 'ncm2/ncm2-bufword'
-  " Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
   Plug 'ncm2/ncm2-cssomni'
   Plug 'kburdett/vim-nuuid'
 
@@ -45,14 +44,10 @@ let g:AutoPairsMapCR = 1
 
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
-Plug 'jasminabasurita/NeoDim', {'frozen': 1}
-Plug 'dracula/vim' " , {'commit': '0743d3d7b3769d012827bc8d1e5375164791cc2f'}
-Plug 'pangloss/vim-javascript', {'for': 'javascript'}
-Plug 'mxw/vim-jsx'
-Plug 'leafgarland/typescript-vim'
-Plug 'digitaltoad/vim-pug'
+" Plug 'jasminabasurita/NeoDim', {'frozen': 1}
+Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'sheerun/vim-polyglot'
 Plug 'farfanoide/vim-kivy'
-Plug 'raghur/vim-ghost', {'do': ':GhostInstall'}
 Plug 'romainl/vim-qf'
 Plug 'yssl/QFEnter'
 let g:qfenter_keymap = {}
@@ -103,8 +98,8 @@ set guifont=FiraCode\ Nerd\ Font\ 11
 
 " set color
 set termguicolors
-colorscheme neodim
-let g:neodim_italic = 1
+colorscheme dracula
+let g:dracula_italic = 1
 highlight Normal ctermbg=NONE
 highlight nonText ctermbg=NONE
 highlight Difftext ctermbg=NONE guibg=NONE
@@ -121,7 +116,7 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#15181F ctermbg=15
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#1E2029 ctermbg=NONE
 
 " AIRLINE CONFIG
-let g:airline_theme='neodim'
+let g:airline_theme='dracula'
 let g:airline#extensions#tabline#enabled=1
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#buffer_nr_show = 1
@@ -187,7 +182,6 @@ set nofixendofline " no new line on save
 let g:ale_linters = {
 \   'javascript': ['eslint'],
 \   'javascript.jsx': ['eslint'],
-\   'json': ['eslint'],
 \   'python': ['flake8'],
 \   'css': ['stylelint'],
 \   'scss': ['stylelint'],
