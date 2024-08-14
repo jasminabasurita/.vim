@@ -14,22 +14,22 @@ let g:mapleader = ' '
 set runtimepath+=~/.vim
 
 " Plug
-call plug#begin('~/.vim/plugged')
+"call plug#begin('~/.vim/plugged')
 " start- all plugins below
 
-Plug 'scrooloose/nerdtree'
+"Plug 'scrooloose/nerdtree'
 " Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'moll/vim-bbye'
-Plug 'neovim/nvim-lspconfig'
+"Plug 'Xuyuanp/nerdtree-git-plugin'
+"Plug 'moll/vim-bbye'
+"Plug 'neovim/nvim-lspconfig'
 
 if has('python3')
-  Plug 'roxma/nvim-yarp'
-  Plug 'ncm2/ncm2'
-  Plug 'ncm2/ncm2-path'
-  Plug 'ncm2/ncm2-bufword'
-  Plug 'ncm2/ncm2-cssomni'
-  Plug 'kburdett/vim-nuuid'
+  "Plug 'roxma/nvim-yarp'
+  "Plug 'ncm2/ncm2'
+  "Plug 'ncm2/ncm2-path'
+  "Plug 'ncm2/ncm2-bufword'
+  "Plug 'ncm2/ncm2-cssomni'
+  "Plug 'kburdett/vim-nuuid'
 
   autocmd BufEnter * call ncm2#enable_for_buffer()
   set completeopt=noinsert,menuone,noselect
@@ -39,59 +39,59 @@ if has('python3')
   inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 endif
 
-Plug 'jiangmiao/auto-pairs'
+"Plug 'jiangmiao/auto-pairs'
 let g:AutoPairsMultilineClose = 0 " disable line jumping for closing pair
 let g:AutoPairsMapCR = 1
 
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-repeat'
+"Plug 'tpope/vim-commentary'
+"Plug 'tpope/vim-repeat'
 " Plug 'jasminabasurita/NeoDim', {'frozen': 1}
-Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'sheerun/vim-polyglot'
-Plug 'farfanoide/vim-kivy'
-Plug 'romainl/vim-qf'
-Plug 'yssl/QFEnter'
+"Plug 'dracula/vim', { 'as': 'dracula' }
+"Plug 'sheerun/vim-polyglot'
+"Plug 'farfanoide/vim-kivy'
+"Plug 'romainl/vim-qf'
+"Plug 'yssl/QFEnter'
 let g:qfenter_keymap = {}
 let g:qfenter_keymap.vopen = ['<C-v>']
 let g:qfenter_keymap.hopen = ['<C-CR>', '<C-s>', '<C-x>']
 let g:qfenter_keymap.topen = ['<C-t>']
-Plug 'mhinz/vim-grepper'
+"Plug 'mhinz/vim-grepper'
 nmap gs <plug>(GrepperOperator)
 vmap gs <plug>(GrepperOperator)
 nnoremap <leader>ag :Grepper -tool ag<cr>
 nnoremap <leader>rg :Grepper -tool rg<cr>
 
-Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$|bower_components|node_modules|dist',
   \ 'file': '\.pyc$\|\.pyo$\|\.rbc$|\.rbo$\|\.class$\|\.o$\|\~$\',
 \ }
-Plug 'dense-analysis/ale'
-Plug 'bling/vim-airline'
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-Plug 'elzr/vim-json'
-Plug 'othree/jspc.vim'
-Plug 'tpope/vim-surround'
-Plug 'ryanoasis/vim-devicons'
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'ap/vim-css-color'
+"Plug 'dense-analysis/ale'
+"Plug 'bling/vim-airline'
+"Plug 'tpope/vim-fugitive'
+"Plug 'airblade/vim-gitgutter'
+"Plug 'elzr/vim-json'
+"Plug 'othree/jspc.vim'
+"Plug 'tpope/vim-surround'
+"Plug 'ryanoasis/vim-devicons'
+"Plug 'nathanaelkane/vim-indent-guides'
+"Plug 'ap/vim-css-color'
 " Build Composer function for markdown composer
-function! BuildComposer(info)
-  if a:info.status != 'unchanged' || a:info.force
-    if has('nvim')
-      !cargo build --release
-    else
-      !cargo build --release --no-default-features --features json-rpc
-    endif
-  endif
-endfunction
-Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
+"function! BuildComposer(info)
+"  if a:info.status != 'unchanged' || a:info.force
+"    if has('nvim')
+"      !cargo build --release
+"    else
+"      !cargo build --release --no-default-features --features json-rpc
+"    endif
+"  endif
+"endfunction
+"Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
 
 " stop - all plugins above
-call plug#end()
+"call plug#end()
 
 " font
 set guifont=FiraCode\ Nerd\ Font\ 11
