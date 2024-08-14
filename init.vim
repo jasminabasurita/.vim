@@ -21,6 +21,7 @@ Plug 'scrooloose/nerdtree'
 " Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'moll/vim-bbye'
+Plug 'neovim/nvim-lspconfig'
 
 if has('python3')
   Plug 'roxma/nvim-yarp'
@@ -64,10 +65,10 @@ Plug 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$|bower_components|node_modules',
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$|bower_components|node_modules|dist',
   \ 'file': '\.pyc$\|\.pyo$\|\.rbc$|\.rbo$\|\.class$\|\.o$\|\~$\',
 \ }
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 Plug 'bling/vim-airline'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -181,6 +182,8 @@ set nofixendofline " no new line on save
 " ALE CONIGURATIONS
 let g:ale_linters = {
 \   'javascript': ['eslint'],
+\   'typescript': ['eslint'],
+\   'typescript.tsx': ['eslint'],
 \   'javascript.jsx': ['eslint'],
 \   'python': ['flake8'],
 \   'css': ['stylelint'],
@@ -189,6 +192,9 @@ let g:ale_linters = {
 \}
 let g:ale_fixers = {
 \   'javascript': ['eslint'],
+\   'typescript': ['prettier', 'eslint'],
+\   'typescriptreact': ['prettier', 'eslint'],
+\   'javascript.jsx': ['eslint'],
 \   'python': ['autopep8', 'yapf'],
 \   'css': ['stylelint'],
 \   'scss': ['stylelint'],
