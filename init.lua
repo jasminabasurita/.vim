@@ -1,5 +1,6 @@
 require('plugins')
 require('keymap')
+require('abbreviations')
 
 -- LSP Setup
 require('mason').setup()
