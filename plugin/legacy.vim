@@ -34,24 +34,6 @@ let g:airline#extensions#ale#enabled=1
 autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent! loadview
 
-" NERDTREE
-" NERDTree shortcut
-nnoremap <F1> :e.<CR>
-" Show dot files (ie. .vimrc)
-let g:NERDTreeQuitOnOpen=1
-let g:NERDTreeShowHidden=1
-let g:NERDTreeMinimalUI=1
-let g:NERDTreeDirArrows=1
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-" NERDTree Syntax Highlighting
-let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-" let g:NERDTreeFileExtensionHighlightFullName = 1
-let g:NERDTreeExactMatchHighlightFullName = 1
-let g:NERDTreePatternMatchHighlightFullName = 1
-let g:NERDTreeHighlightFolders = 1 " enables folder icon highlighting using exact match
-let g:NERDTreeLimitedSyntax=1
-
 " Get Rid of Git Gutters key mappings
 let g:gitgutter_map_keys = 0
 

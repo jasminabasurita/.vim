@@ -4,6 +4,7 @@ local imap = function(lhs, rhs, opt) map('i', lhs, rhs, opt) end
 local vmap = function(lhs, rhs, opt) map('v', lhs, rhs, opt) end 
 
 vim.g.mapleader = ' '
+vim.g.maplocalleader = "\\"
 
 -- Exit insert mode
 map({ 'i', 't' }, 'jk', '<esc>')
@@ -14,6 +15,9 @@ nmap('<F2>', ':noh<cr>', { silent = true })
 -- capitalize a word in insert or normal mode
 nmap('<C-u>', 'viwUe')
 imap('<C-u>', '<esc>viwUea')
+
+-- open file explorer
+nmap('<F1>', ':e.<CR>')
 
 -- Easier split navigation
 nmap('<C-J>', '<C-W><C-J>')

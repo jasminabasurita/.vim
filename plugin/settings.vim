@@ -41,9 +41,6 @@ set nofixendofline " no new line on save
 set splitbelow
 set splitright
 
-" font
-set guifont=FiraCode\ Nerd\ Font\ 11
-
 " set color
 set termguicolors
 colorscheme dracula
