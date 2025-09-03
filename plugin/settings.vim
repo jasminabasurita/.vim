@@ -41,10 +41,6 @@ set nofixendofline " no new line on save
 set splitbelow
 set splitright
 
-" set color
-set termguicolors
-colorscheme dracula
-let g:dracula_italic = 1
-highlight Normal ctermbg=NONE
-highlight nonText ctermbg=NONE
-highlight Difftext ctermbg=NONE guibg=NONE
+" Save and Reload Folds!
+autocmd BufWinLeave *.* mkview
+autocmd BufWinEnter *.* silent! loadview

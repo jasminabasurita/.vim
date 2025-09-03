@@ -1,38 +1,35 @@
 local map = vim.keymap.set
-local nmap = function(lhs, rhs, opt) map('n', lhs, rhs, opt) end 
-local imap = function(lhs, rhs, opt) map('i', lhs, rhs, opt) end 
-local vmap = function(lhs, rhs, opt) map('v', lhs, rhs, opt) end 
+local nmap = function(lhs, rhs, opt) map('n', lhs, rhs, opt) end
+local imap = function(lhs, rhs, opt) map('i', lhs, rhs, opt) end
+local vmap = function(lhs, rhs, opt) map('v', lhs, rhs, opt) end
 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = "\\"
 
 -- Exit insert mode
-map({ 'i', 't' }, 'jk', '<esc>')
+map({ 'i', 't' }, 'jk', '<esc>', { desc = 'exit insert mode' })
 
 -- Clear highlights
-nmap('<F2>', ':noh<cr>', { silent = true })
+nmap('<leader>w', ':noh<cr>', { silent = true, desc = 'Clear highlights' })
 
 -- capitalize a word in insert or normal mode
-nmap('<C-u>', 'viwUe')
-imap('<C-u>', '<esc>viwUea')
-
--- open file explorer
-nmap('<F1>', ':e.<CR>')
+nmap('<C-u>', 'viwUe', { desc = 'Capitalize word' })
+imap('<C-u>', '<esc>viwUea', { desc = 'Capitalize word' })
 
 -- Easier split navigation
-nmap('<C-J>', '<C-W><C-J>')
-nmap('<C-K>', '<C-W><C-K>')
-nmap('<C-L>', '<C-W><C-L>')
-nmap('<C-H>', '<C-W><C-H>')
+nmap('<C-J>', '<C-W><C-J>', { desc = 'Move to split down' })
+nmap('<C-K>', '<C-W><C-K>', { desc = 'Move to split up' })
+nmap('<C-L>', '<C-W><C-L>', { desc = 'Move to split right' })
+nmap('<C-H>', '<C-W><C-H>', { desc = 'Move to split left' })
 
 -- Faster Navigation
-map({ 'n', 'v', 'o' }, 'H', '^')
-map({ 'n', 'v', 'o' }, 'L', '$')
-map({ 'n', 'v', 'o' }, 'J', '4j')
-map({ 'n', 'v', 'o' }, 'K', '4k')
+map({ 'n', 'v', 'o' }, 'H', '^', { desc = 'Move to start of line' })
+map({ 'n', 'v', 'o' }, 'L', '$', { desc = 'Move to end of line' })
+map({ 'n', 'v', 'o' }, 'J', '4j', { desc = 'Move 4 lines down' })
+map({ 'n', 'v', 'o' }, 'K', '4k', { desc = 'Move 4 lines up' })
 
 -- Buffers
-nmap('<Leader>q', ':Bdelete<CR>')
+-- nmap('<Leader>q', ':Bdelete<CR>')
 nmap('<Leader>h', ':bp<CR>')
 nmap('<Leader>l', ':bn<CR>')
 nmap('<Leader>1', ':b1<CR>')
@@ -78,15 +75,4 @@ vmap('<leader>rc', '<Esc>`>a*/}<Esc>`<i{/*<Esc>')
 -- Open vim configs
 nmap('<leader>ev', ':edit ~/.vim/ <cr>')
 
--- Moving through grep
-nmap('<leader>n', ':cn<CR>')
-nmap('<leader>p', ':cp<CR>')
-
--- LSP keymaps
-vim.api.nvim_create_autocmd('LspAttach', {
-  callback = function(e)
-    local opts = { buffer = e.buf }
-    -- show lsp definition hover
-    nmap('<leader>k', function() vim.lsp.buf.hover() end, opts)
-  end
-})
+nmap('<leader>ts', [[:%s/\s\+$//e<cr>]], { silent = true, desc = 'Clean up trailing spaces'})
