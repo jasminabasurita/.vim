@@ -2,7 +2,7 @@
 
 This branch is being kept in the odd chance I'd like to use vim instead of neovim someday. I doubt I will be at all actively maintaining it so use at your own risk.
 
-![Vim Screenshot](https://raw.githubusercontent.com/jasminabasurita/.vim/main/vim.png)
+![Vim Screenshot](https://raw.githubusercontent.com/jasminabasurita/.vim/vim/vim.png)
 
 | Packages I Use:                 |                                                    How I feel about them |
 | ------------------------------- | -----------------------------------------------------------------------: |
