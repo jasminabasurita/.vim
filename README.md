@@ -1,18 +1,17 @@
 # Jazzy's NeoVim
 
-Hi, I'm Jazzy!
-I :heart: nerding out about ![NeoVim](https://raw.githubusercontent.com/neovim/neovim.github.io/master/logos/favicon.ico) and customizing the editor!
+This branch is being kept in the odd chance I'd like to use vim instead of neovim someday. I doubt I will be at all actively maintaining it so use at your own risk.
 
-![Vim Screenshot](https://raw.githubusercontent.com/jasminabasurita/.vim/master/vim.png)
+![Vim Screenshot](https://raw.githubusercontent.com/jasminabasurita/.vim/main/vim.png)
 
 | Packages I Use:                 |                                                    How I feel about them |
 | ------------------------------- | -----------------------------------------------------------------------: |
-| Vundle.vim                      |                                        Makes Plugin Management a Breeze! |
+| vim-plug                        |                                        Makes Plugin Management a Breeze! |
 | nerdtree.git                    |                                                   Absolutely **Crucial** |
 | vim-nerdtree-syntax-highlight   |                     Highlights nerdtree files and folders based on types |
 | nerdtree-git-plugin             |                            Adds symbols when files have unstaged changes |
 | vim-devicons                    |                                       Adds icons to nerdtree and airline |
-| ncm2                   | So Helpful, keeps track of paths, variable names and built in functions! |
+| ncm2                            | So Helpful, keeps track of paths, variable names and built in functions! |
 | auto-pairs                      |                        closes brackets and quotes! what's not to love?!? |
 | vim-commentary                  |                                       Comment things out quick and easy! |
 | vim-dracula                     |                                   Clean & simple theme, easy on the eyes |
@@ -21,7 +20,7 @@ I :heart: nerding out about ![NeoVim](https://raw.githubusercontent.com/neovim/n
 | vim-jsx                         |                                               React syntax highlighting! |
 | javascript-libraries-syntax.vim |                                       I clearly like syntax highlighting |
 | JavaScript-Indent               |                                                       Better Indentation |
-| ale                             |     **I** _Love_ ALE. lints and fixes! asynchronous! _Essential_ package |
+| ale                             |                                          asynchronous linting and fixing |
 | vim-airline                     |                                      Makes me feel like a real developer |
 | vim-bufferline                  |                               improved buffer management for vim-airline |
 | vim-fugitive                    |                                              very featureful git wrapper |
@@ -70,5 +69,5 @@ I :heart: nerding out about ![NeoVim](https://raw.githubusercontent.com/neovim/n
 
 1.  clone to user home
 2.  cd into this repo
-3.  run `./neoVimInit.sh` or `./vimInit.sh` depending on which editor you use
+3.  run `init.sh` depending on which editor you use
 4.  enjoy!

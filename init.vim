@@ -21,7 +21,6 @@ Plug 'scrooloose/nerdtree'
 " Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'moll/vim-bbye'
-Plug 'neovim/nvim-lspconfig'
 
 if has('python3')
   Plug 'roxma/nvim-yarp'
