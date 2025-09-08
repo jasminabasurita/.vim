@@ -1,4 +1,11 @@
-local map = vim.keymap.set
+local merge = require('helpers').merge
+
+local defaults = { silent = true, noremap = true }
+
+local map = function(mode, lhs, rhs, opt)
+  vim.keymap.set(mode, lhs, rhs, merge(defaults, opt))
+end
+
 local nmap = function(lhs, rhs, opt) map('n', lhs, rhs, opt) end
 local imap = function(lhs, rhs, opt) map('i', lhs, rhs, opt) end
 local vmap = function(lhs, rhs, opt) map('v', lhs, rhs, opt) end
@@ -10,7 +17,7 @@ vim.g.maplocalleader = "\\"
 map({ 'i', 't' }, 'jk', '<esc>', { desc = 'exit insert mode' })
 
 -- Clear highlights
-nmap('<leader>w', ':noh<cr>', { silent = true, desc = 'Clear highlights' })
+nmap('<leader>w', ':noh<cr>', { desc = 'Clear highlights' })
 
 -- capitalize a word in insert or normal mode
 nmap('<C-u>', 'viwUe', { desc = 'Capitalize word' })
@@ -29,18 +36,19 @@ map({ 'n', 'v', 'o' }, 'J', '4j', { desc = 'Move 4 lines down' })
 map({ 'n', 'v', 'o' }, 'K', '4k', { desc = 'Move 4 lines up' })
 
 -- Buffers
--- nmap('<Leader>q', ':Bdelete<CR>')
-nmap('<Leader>h', ':bp<CR>')
-nmap('<Leader>l', ':bn<CR>')
-nmap('<Leader>1', ':b1<CR>')
-nmap('<Leader>2', ':b2<CR>')
-nmap('<Leader>3', ':b3<CR>')
-nmap('<Leader>4', ':b4<CR>')
-nmap('<Leader>5', ':b5<CR>')
-nmap('<Leader>6', ':b6<CR>')
-nmap('<Leader>7', ':b7<CR>')
-nmap('<Leader>8', ':b8<CR>')
-nmap('<Leader>9', ':b9<CR>')
+nmap('<Leader>h', ':BufferLineCyclePrev<CR>', { desc = 'Previous buffer' })
+nmap('<Leader>l', ':BufferLineCycleNext<CR>', { desc = 'Next buffer' })
+nmap('<Leader>H', ':BufferLineMovePrev<CR>', { desc = 'Previous buffer' })
+nmap('<Leader>L', ':BufferLineMoveNext<CR>', { desc = 'Next buffer' })
+nmap('<leader>1', function() require('bufferline').go_to(1, true) end, { desc = 'Go to buffer 1' })
+nmap('<leader>2', function() require('bufferline').go_to(2, true) end, { desc = 'Go to buffer 2' })
+nmap('<leader>3', function() require('bufferline').go_to(3, true) end, { desc = 'Go to buffer 3' })
+nmap('<leader>4', function() require('bufferline').go_to(4, true) end, { desc = 'Go to buffer 4' })
+nmap('<leader>5', function() require('bufferline').go_to(5, true) end, { desc = 'Go to buffer 5' })
+nmap('<leader>6', function() require('bufferline').go_to(6, true) end, { desc = 'Go to buffer 6' })
+nmap('<leader>7', function() require('bufferline').go_to(7, true) end, { desc = 'Go to buffer 7' })
+nmap('<leader>8', function() require('bufferline').go_to(8, true) end, { desc = 'Go to buffer 8' })
+nmap('<leader>9', function() require('bufferline').go_to(9, true) end, { desc = 'Go to buffer 9' })
 
 -- Add Punctuation to end of line or line break
 nmap('<leader>;', '$a;<Esc>')
@@ -72,7 +80,6 @@ vmap('<leader>/', '<Esc>`>a*/<Esc>`<i/*<Esc>')
 -- React comment
 vmap('<leader>rc', '<Esc>`>a*/}<Esc>`<i{/*<Esc>')
 
--- Open vim configs
-nmap('<leader>ev', ':edit ~/.vim/ <cr>')
+nmap('<leader>ts', [[:%s/\s\+$//e<cr>]], { desc = 'Clean up trailing spaces' })
 
-nmap('<leader>ts', [[:%s/\s\+$//e<cr>]], { silent = true, desc = 'Clean up trailing spaces'})
+nmap('<leader>cf', '<cmd>let @+ = @%<cr>', { desc = 'Copy current filename to system clipboard' })

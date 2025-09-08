@@ -4,11 +4,8 @@ return {
     'nvim-treesitter/nvim-treesitter',
     lazy = false,
     branch = 'main',
-    build = ':TSUpdate',
-    opts = {
-      highlight = { enable = true },
-      indent = { enable = true },
-      ensure_installed = {
+    build = function()
+      require('nvim-treesitter').install({
         'bash',
         'css',
         'dockerfile',
@@ -27,7 +24,12 @@ return {
         'typescript',
         'vim',
         'yaml',
-      },
+      })
+      require('nvim-treesitter').update()
+    end,
+    opts = {
+      highlight = { enable = true },
+      indent = { enable = true },
     },
   },
 
@@ -41,18 +43,18 @@ return {
       vim.cmd([[
         colorscheme dracula
         highlight Normal ctermbg=NONE
-        highlight NonText ctermbg=NONE guifg='#6272A4'
+        highlight NonText ctermbg=NONE guifg='#ABB2BF' gui=italic
+        highlight Comment ctermbg=NONE guifg='#6272A4' gui=italic
         highlight Difftext ctermbg=NONE guibg=NONE
       ]])
     end,
   },
 
-  ---highlight color definitions (#844631)
+  ---highlight color definitions (e.g. #844631)
   {
-    "catgoose/nvim-colorizer.lua",
-    event = "BufReadPre",
-    opts = { -- set to setup table
-    },
+    'catgoose/nvim-colorizer.lua',
+    event = 'BufReadPre',
+    opts = {},
   },
 
   --- statusline
@@ -60,31 +62,80 @@ return {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     opts = {
-      tabline = {
-        lualine_a = {'buffers'},
+      -- tabline = {
+      --   lualine_a = { 'buffers' },
+      -- },
+    },
+  },
+  --- bufferline
+  {
+    'akinsho/bufferline.nvim',
+    version = '*',
+    dependencies = 'nvim-tree/nvim-web-devicons',
+    opts = {
+      options = {
+        separator_style = 'thick',
+        diagnostics = 'nvim_lsp',
+        diagnostics_indicator = function(count, level)
+          local icon = level:match('error') and ' ' or (level:match('warning') and ' ' or ' ')
+          return " " .. icon .. count
+        end,
+        numbers = 'ordinal',
       },
     },
   },
+
+  -- {
+  --   'https://gitlab.com/HiPhish/rainbow-delimiters.nvim.git',
+  --   config = function()
+  --     require('rainbow-delimiters.setup').setup {
+  --       highlight = {
+  --         "DraculaRed",
+  --         "DraculaYellow",
+  --         "DraculaBlue",
+  --         "DraculaOrange",
+  --         "DraculaGreen",
+  --         "DraculaPurple",
+  --         "DraculaCyan",
+  --       },
+  --     }
+  --   end
+  -- },
 
   --- indentation guides
   {
     'lukas-reineke/indent-blankline.nvim',
     main = 'ibl',
-    dependencies = { 'nvim-treesitter/nvim-treesitter' },
-    ---@module 'ibl'
-    ---@type ibl.config
-    opts = {},
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+    },
+    opts = {
+      indent = { highlight = 'DraculaSubtle' },
+      scope = { highlight = 'DraculaOrange' }
+    },
   },
 
   --- greeter
   {
     'goolord/alpha-nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
-    config = function ()
+    config = function()
       local alpha = require('alpha')
       local dashboard = require('alpha.themes.dashboard')
 
       dashboard.section.header.val = require('assets.rat')
+
+      dashboard.section.buttons.val = {
+        dashboard.button('o', '󰂺  > Open session for cwd', function() require("persistence").load() end),
+        dashboard.button('b', '󰂻  > Browse sessions', function() require("persistence").select() end),
+        dashboard.button('e', '  > New file', ':ene<cr>'),
+        dashboard.button('f', '  > Find file', ':FzfLua files<cr>'),
+        dashboard.button('t', '󰙅  > File tree', ':Neotree source=filesystem<cr>'),
+        dashboard.button('p', '  > Plugins', ':Lazy<cr>'),
+        dashboard.button('s', '  > Settings', ':Neotree dir=~/.vim<cr>'),
+        dashboard.button('q', '  > Quit', ':qa<cr>'),
+      }
+
       alpha.setup(dashboard.config)
     end,
   },
@@ -105,5 +156,18 @@ return {
         delay = 100,
       },
     }
-  }
+  },
+
+  --- markdown
+  {
+    'MeanderingProgrammer/render-markdown.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
+    opts = {
+      completions = {
+        lsp = { enabled = true },
+      },
+    },
+  },
 }

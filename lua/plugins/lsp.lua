@@ -31,6 +31,7 @@ return {
         ensure_installed = {
           'bash-language-server',
           'eslint_d',
+          'prettier',
           'markdownlint',
           'shellcheck',
           'shfmt',
@@ -53,36 +54,38 @@ return {
     },
 
     keys = {
-      { '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>', { desc = 'Goto previous diagnostic' } },
-      { ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>', { desc = 'Goto next diagnostic' } },
+      { '<leader>d', function() vim.diagnostic.open_float() end, { desc = 'Goto previous diagnostic' } },
+      { '[d',        function() vim.diagnostic.goto_prev() end,  { desc = 'Goto previous diagnostic' } },
+      { ']d',        function() vim.diagnostic.goto_next() end,  { desc = 'Goto next diagnostic' } },
       {
         '[e',
-        '<cmd>lua vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity["ERROR"] })<cr>',
+        function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity["ERROR"] }) end,
         { desc = 'Goto previous error' },
       },
       {
         ']e',
-        '<cmd>lua vim.diagnostic.goto_next({ severity = vim.diagnostic.severity["ERROR"] })<cr>',
+        function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity["ERROR"] }) end,
         { desc = 'Goto next error' },
       },
       {
         '[w',
-        '<cmd>lua vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity["WARN"] })<cr>',
+        function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity["WARN"] }) end,
         { desc = 'Goto previous warning' },
       },
       {
         ']w',
-        '<cmd>lua vim.diagnostic.goto_next({ severity = vim.diagnostic.severity["WARN"] })<cr>',
+        function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity["WARN"] }) end,
         { desc = 'Goto next warning' },
       },
-      { 'gc', '<cmd>lua vim.lsp.buf.code_action()<cr>', { desc = 'List code actions' } },
-      { 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', { desc = 'Goto definition' } },
-      { 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', { desc = 'Goto declaration' } },
-      { 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', { desc = 'Goto implementation' } },
-      { 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>', { desc = 'Goto type definition' } },
-      { 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', { desc = 'List all references' } },
-      { 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', { desc = 'View signature info' } },
-      { 'gk', '<cmd>lua vim.lsp.buf.hover()<cr>', { desc = 'Show LSP hover definition' } },
+      { '<c-f>',     function() vim.lsp.buf.format() end,          { desc = 'Format current buffer' } },
+      { '<leader>a', function() vim.lsp.buf.code_action() end,     { desc = 'List code actions' } },
+      { 'gd',        function() vim.lsp.buf.definition() end,      { desc = 'Goto definition' } },
+      { 'gD',        function() vim.lsp.buf.declaration() end,     { desc = 'Goto declaration' } },
+      { 'gi',        function() vim.lsp.buf.implementation() end,  { desc = 'Goto implementation' } },
+      { 'go',        function() vim.lsp.buf.type_definition() end, { desc = 'Goto type definition' } },
+      { 'gr',        function() vim.lsp.buf.references() end,      { desc = 'List all references' } },
+      { 'gs',        function() vim.lsp.buf.signature_help() end,  { desc = 'View signature info' } },
+      { 'gk',        function() vim.lsp.buf.hover() end,           { desc = 'Show LSP hover definition' } },
     },
 
     config = function()
@@ -90,46 +93,44 @@ return {
       local cmp_nvim_lsp = require('cmp_nvim_lsp')
       local capabilities = cmp_nvim_lsp.default_capabilities()
 
+      vim.lsp.config('*', {
+        capabilities = capabilities,
+        on_attach = function(_, bufnr)
+          vim.api.nvim_create_autocmd('BufWritePre', {
+            buffer = bufnr,
+            callback = function()
+              vim.lsp.buf.format()
+            end,
+          })
+        end,
+      })
+
       -- Bash
-      lspconfig.bashls.setup({ capabilities = capabilities })
+      lspconfig.bashls.setup({})
 
       -- CSS
-      lspconfig.cssls.setup({ capabilities = capabilities })
+      lspconfig.cssls.setup({})
 
       -- Docker
-      lspconfig.dockerls.setup({ capabilities = capabilities })
+      lspconfig.dockerls.setup({})
 
       -- Elixir
       -- lspconfig.elixirls.setup({ capabilities = capabilities })
 
       -- ESLint
-      lspconfig.eslint.setup({
-        capabilities = capabilities,
-        on_attach = function(_, bufnr)
-          vim.api.nvim_create_autocmd('BufWritePre', {
-            buffer = bufnr,
-            command = 'EslintFixAll',
-          })
-        end,
-      })
+      lspconfig.eslint.setup({})
 
       -- HTML
-      lspconfig.html.setup({ capabilities = capabilities })
+      lspconfig.html.setup({})
 
       -- JSON
-      lspconfig.jsonls.setup({ capabilities = capabilities })
+      lspconfig.jsonls.setup({})
 
       -- Lua
-      lspconfig.lua_ls.setup({
-        capabilities = capabilities,
-        settings = {
-          Lua = {
-            diagnostics = {
-              globals = { 'vim' },
-            },
-          },
-        },
-      })
+      lspconfig.lua_ls.setup({})
+
+      --- prettier
+      lspconfig.prettier.setup({})
 
       -- TypeScript
       local inlayHints = {

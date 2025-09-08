@@ -17,6 +17,7 @@ set smarttab      " Tab smarter
 set number        " Show line numbers
 set smartindent   " C-like autoindenting when starting a new line
 set mouse=a       " Enable mouse
+set mousemoveevent       " Enable mouse
 set noswapfile    " Disables making temporary backup files (.swp)
 set scrolloff=15  " Start scrolling when we're 8 lines away from margins
 set sidescrolloff=15

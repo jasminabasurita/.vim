@@ -3,17 +3,19 @@ return {
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
     dependencies = {
+      'nvim-treesitter/nvim-treesitter',
       'L3MON4D3/LuaSnip',
       'rafamadriz/friendly-snippets',
       'hrsh7th/cmp-nvim-lsp',
       'saadparwaiz1/cmp_luasnip',
       'hrsh7th/cmp-buffer', -- source for text in buffer
-      'hrsh7th/cmp-path', -- source for file system paths
+      'hrsh7th/cmp-path',   -- source for file system paths
       'windwp/nvim-autopairs'
     },
     config = function()
       local cmp = require('cmp')
       local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+
       require('luasnip.loaders.from_vscode').lazy_load()
 
       cmp.event:on(
