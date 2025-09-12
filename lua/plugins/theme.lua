@@ -91,11 +91,14 @@ return {
   --- statusline
   {
     'nvim-lualine/lualine.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    dependencies = {
+      'nvim-tree/nvim-web-devicons',
+      'AndreM222/copilot-lualine',
+    },
     opts = {
-      -- tabline = {
-      --   lualine_a = { 'buffers' },
-      -- },
+      sections = {
+        lualine_x = { { 'copilot', show_colors = true }, 'encoding', 'fileformat', 'filetype' },
+      },
     },
   },
   --- bufferline
@@ -174,6 +177,7 @@ return {
   --- markdown
   {
     'MeanderingProgrammer/render-markdown.nvim',
+    ft = { "markdown", "codecompanion" },
     dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
     ---@module 'render-markdown'
     ---@type render.md.UserConfig
