@@ -27,10 +27,41 @@ return {
       })
       require('nvim-treesitter').update()
     end,
-    opts = {
-      highlight = { enable = true },
-      indent = { enable = true },
-    },
+    config = function()
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = {
+          'bash',
+          'css',
+          'dockerfile',
+          'elixir',
+          'html',
+          'javascript',
+          'json',
+          'javascriptreact',
+          'liquid',
+          'lua',
+          'markdown',
+          'python',
+          'query',
+          'regex',
+          'typescriptreact',
+          'typescript',
+          'vim',
+          'yaml',
+        },
+        callback = function()
+          -- syntax highlighting, provided by Neovim
+          vim.treesitter.start()
+          -- folds, provided by Neovim
+          vim.wo.foldlevel = 9999999                          --default to all folds open
+          vim.wo.foldmethod = 'expr'                          --use a function to fold
+          vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()' --set treesitter as fold function
+          -- indentation, provided by nvim-treesitter
+          vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end,
+      })
+    end
+
   },
 
   --- colorscheme
@@ -138,24 +169,6 @@ return {
 
       alpha.setup(dashboard.config)
     end,
-  },
-
-  --- git gutters
-  {
-    'lewis6991/gitsigns.nvim',
-    opts = {
-      signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '±' },
-      },
-      current_line_blame = true,
-      current_line_blame_opts = {
-        delay = 100,
-      },
-    }
   },
 
   --- markdown

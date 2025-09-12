@@ -52,7 +52,12 @@ nmap('<leader>9', function() require('bufferline').go_to(9, true) end, { desc = 
 
 -- Add Punctuation to end of line or line break
 nmap('<leader>;', '$a;<Esc>')
-nmap('<leader>,', '$a,<Esc>')
+nmap(
+  '<leader>,',
+  function()
+    vim.cmd.normal '$a,'
+  end
+)
 
 -- Break line at cursor
 nmap('<leader><CR>', 'i<CR><Esc>')

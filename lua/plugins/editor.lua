@@ -79,5 +79,22 @@ return {
     keys = {
       { '<leader>q', '<cmd>:Bdelete<cr>', { desc = 'Delete current buffer' } }
     }
+  },
+  -- some utils to help with refactoring.
+  {
+    'nvim-treesitter/nvim-treesitter-refactor',
+    enabled = false, -- Not currently supporting `main` branch of treesitter
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    opts = {
+      refactor = {
+        smart_rename = {
+          enable = true,
+          -- Assign keymaps to false to disable them, e.g. `smart_rename = false`.
+          keymaps = {
+            smart_rename = "grr",
+          },
+        },
+      },
+    },
   }
 }

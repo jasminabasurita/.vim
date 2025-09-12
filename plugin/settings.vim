@@ -41,7 +41,3 @@ set nofixendofline " no new line on save
 " more natural splits
 set splitbelow
 set splitright
-
-" Save and Reload Folds!
-autocmd BufWinLeave *.* mkview
-autocmd BufWinEnter *.* silent! loadview
