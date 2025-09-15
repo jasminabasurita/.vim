@@ -188,6 +188,7 @@ return {
   },
   {
     "dmmulroy/ts-error-translator.nvim",
+    enabled = false,
     event = "VeryLazy",
     ft = {
       "javascript",

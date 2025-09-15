@@ -119,23 +119,6 @@ return {
     },
   },
 
-  -- {
-  --   'https://gitlab.com/HiPhish/rainbow-delimiters.nvim.git',
-  --   config = function()
-  --     require('rainbow-delimiters.setup').setup {
-  --       highlight = {
-  --         "DraculaRed",
-  --         "DraculaYellow",
-  --         "DraculaBlue",
-  --         "DraculaOrange",
-  --         "DraculaGreen",
-  --         "DraculaPurple",
-  --         "DraculaCyan",
-  --       },
-  --     }
-  --   end
-  -- },
-
   --- indentation guides
   {
     'lukas-reineke/indent-blankline.nvim',

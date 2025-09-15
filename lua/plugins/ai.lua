@@ -24,6 +24,17 @@ return {
       'nvim-lua/plenary.nvim',
       'MeanderingProgrammer/render-markdown.nvim',
     },
-    opts = {},
+    keys = {
+      { '<F4>', '<cmd>CodeCompanionChat Toggle<cr>', desc = 'Open Code Companion' },
+    },
+    opts = {
+      display = {
+        chat = {
+          window = {
+            width = 45,
+          }
+        }
+      }
+    },
   },
 }
