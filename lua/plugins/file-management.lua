@@ -24,13 +24,15 @@ return {
       { '<F2>',       '<cmd>Neotree source=buffers toggle=true<cr>',    silent = true },
       { '<F3>',       '<cmd>Neotree source=git_status toggle=true<cr>', silent = true },
       --- Open vim configs
-      { '<leader>ev', '<cmd>Neotree dir=~/.vim/<cr>',                    silent = true },
+      { '<leader>ev', '<cmd>Neotree dir=~/.vim/<cr>',                   silent = true },
     },
   },
+
   --- Fuzzy file finder
   {
-    "ibhagwan/fzf-lua",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    'ibhagwan/fzf-lua',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    cmd = 'FzfLua',
     keys = {
       { '<c-p>',     '<cmd>FzfLua files<cr>',     silent = true },
       { '<c-g>',     '<cmd>FzfLua live_grep<cr>', silent = true },
@@ -38,10 +40,11 @@ return {
     },
     opts = {},
   },
+
   --- Session Manager
   {
-    "folke/persistence.nvim",
-    event = "BufReadPre",
-    opts = {}
+    'folke/persistence.nvim',
+    event = 'BufReadPre',
+    opts = {},
   },
 }

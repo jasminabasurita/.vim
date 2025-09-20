@@ -17,8 +17,8 @@ return {
 
       autopairs.setup({ check_ts = true })
 
-      local brackets = { { '(', ')' }, { '[', ']' }, { '{', '}' }, }
-      autopairs.add_rules {
+      local brackets = { { '(', ')' }, { '[', ']' }, { '{', '}' } }
+      autopairs.add_rules({
 
         -- Rule for a pair with left-side ' ' and right side ' '
         Rule(' ', ' ')
@@ -29,36 +29,42 @@ return {
               return vim.tbl_contains({
                 brackets[1][1] .. brackets[1][2],
                 brackets[2][1] .. brackets[2][2],
-                brackets[3][1] .. brackets[3][2]
+                brackets[3][1] .. brackets[3][2],
               }, pair)
             end)
             :with_move(cond.none())
             :with_cr(cond.none())
         -- We only want to delete the pair of spaces when the cursor is as such: ( | )
-            :with_del(function(opts)
-              local col = vim.api.nvim_win_get_cursor(0)[2]
-              local context = opts.line:sub(col - 1, col + 2)
-              return vim.tbl_contains({
-                brackets[1][1] .. '  ' .. brackets[1][2],
-                brackets[2][1] .. '  ' .. brackets[2][2],
-                brackets[3][1] .. '  ' .. brackets[3][2]
-              }, context)
-            end)
-      }
+            :with_del(
+              function(opts)
+                local col = vim.api.nvim_win_get_cursor(0)[2]
+                local context = opts.line:sub(col - 1, col + 2)
+                return vim.tbl_contains({
+                  brackets[1][1] .. '  ' .. brackets[1][2],
+                  brackets[2][1] .. '  ' .. brackets[2][2],
+                  brackets[3][1] .. '  ' .. brackets[3][2],
+                }, context)
+              end
+            ),
+      })
       -- For each pair of brackets we will add another rule
       for _, bracket in pairs(brackets) do
-        autopairs.add_rules {
+        autopairs.add_rules({
           -- Each of these rules is for a pair with left-side '( ' and right-side ' )' for each bracket type
           Rule(bracket[1] .. ' ', ' ' .. bracket[2])
               :with_pair(cond.none())
-              :with_move(function(opts) return opts.char == bracket[2] end)
+              :with_move(function(opts)
+                return opts.char == bracket[2]
+              end)
               :with_del(cond.none())
               :use_key(bracket[2])
           -- Removes the trailing whitespace that can occur without this
-              :replace_map_cr(function(_) return '<C-c>2xi<CR><C-c>O' end)
-        }
+              :replace_map_cr(function(_)
+                return '<C-c>2xi<CR><C-c>O'
+              end),
+        })
       end
-    end
+    end,
   },
   {
     'windwp/nvim-ts-autotag',
@@ -67,9 +73,9 @@ return {
     opts = {
       opts = {
         -- Defaults
-        enable_close = true,          -- Auto close tags
-        enable_rename = true,         -- Auto rename pairs of tags
-        enable_close_on_slash = false -- Auto close on trailing </
+        enable_close = true,           -- Auto close tags
+        enable_rename = true,          -- Auto rename pairs of tags
+        enable_close_on_slash = false, -- Auto close on trailing </
       },
     },
   },
@@ -77,8 +83,8 @@ return {
   {
     'famiu/bufdelete.nvim',
     keys = {
-      { '<leader>q', '<cmd>:Bdelete<cr>', { desc = 'Delete current buffer' } }
-    }
+      { '<leader>q', '<cmd>:Bdelete<cr>', { desc = 'Delete current buffer' } },
+    },
   },
   -- some utils to help with refactoring.
   {
@@ -91,10 +97,10 @@ return {
           enable = true,
           -- Assign keymaps to false to disable them, e.g. `smart_rename = false`.
           keymaps = {
-            smart_rename = "grr",
+            smart_rename = 'grr',
           },
         },
       },
     },
-  }
+  },
 }

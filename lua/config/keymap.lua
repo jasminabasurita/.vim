@@ -6,15 +6,21 @@ local map = function(mode, lhs, rhs, opt)
   vim.keymap.set(mode, lhs, rhs, merge(defaults, opt))
 end
 
-local nmap = function(lhs, rhs, opt) map('n', lhs, rhs, opt) end
-local imap = function(lhs, rhs, opt) map('i', lhs, rhs, opt) end
-local vmap = function(lhs, rhs, opt) map('v', lhs, rhs, opt) end
+local nmap = function(lhs, rhs, opt)
+  map('n', lhs, rhs, opt)
+end
+local imap = function(lhs, rhs, opt)
+  map('i', lhs, rhs, opt)
+end
+local vmap = function(lhs, rhs, opt)
+  map('v', lhs, rhs, opt)
+end
 
 vim.g.mapleader = ' '
-vim.g.maplocalleader = "\\"
+vim.g.maplocalleader = '\\'
 
 -- Exit insert mode
-map({ 'i', 't' }, 'jk', '<esc>', { desc = 'exit insert mode' })
+map({ 'i' }, 'jk', '<esc>', { desc = 'exit insert mode' })
 
 -- Clear highlights
 nmap('<leader>w', ':noh<cr>', { desc = 'Clear highlights' })
@@ -40,24 +46,39 @@ nmap('<Leader>h', ':BufferLineCyclePrev<CR>', { desc = 'Previous buffer' })
 nmap('<Leader>l', ':BufferLineCycleNext<CR>', { desc = 'Next buffer' })
 nmap('<Leader>H', ':BufferLineMovePrev<CR>', { desc = 'Previous buffer' })
 nmap('<Leader>L', ':BufferLineMoveNext<CR>', { desc = 'Next buffer' })
-nmap('<leader>1', function() require('bufferline').go_to(1, true) end, { desc = 'Go to buffer 1' })
-nmap('<leader>2', function() require('bufferline').go_to(2, true) end, { desc = 'Go to buffer 2' })
-nmap('<leader>3', function() require('bufferline').go_to(3, true) end, { desc = 'Go to buffer 3' })
-nmap('<leader>4', function() require('bufferline').go_to(4, true) end, { desc = 'Go to buffer 4' })
-nmap('<leader>5', function() require('bufferline').go_to(5, true) end, { desc = 'Go to buffer 5' })
-nmap('<leader>6', function() require('bufferline').go_to(6, true) end, { desc = 'Go to buffer 6' })
-nmap('<leader>7', function() require('bufferline').go_to(7, true) end, { desc = 'Go to buffer 7' })
-nmap('<leader>8', function() require('bufferline').go_to(8, true) end, { desc = 'Go to buffer 8' })
-nmap('<leader>9', function() require('bufferline').go_to(9, true) end, { desc = 'Go to buffer 9' })
+nmap('<leader>1', function()
+  require('bufferline').go_to(1, true)
+end, { desc = 'Go to buffer 1' })
+nmap('<leader>2', function()
+  require('bufferline').go_to(2, true)
+end, { desc = 'Go to buffer 2' })
+nmap('<leader>3', function()
+  require('bufferline').go_to(3, true)
+end, { desc = 'Go to buffer 3' })
+nmap('<leader>4', function()
+  require('bufferline').go_to(4, true)
+end, { desc = 'Go to buffer 4' })
+nmap('<leader>5', function()
+  require('bufferline').go_to(5, true)
+end, { desc = 'Go to buffer 5' })
+nmap('<leader>6', function()
+  require('bufferline').go_to(6, true)
+end, { desc = 'Go to buffer 6' })
+nmap('<leader>7', function()
+  require('bufferline').go_to(7, true)
+end, { desc = 'Go to buffer 7' })
+nmap('<leader>8', function()
+  require('bufferline').go_to(8, true)
+end, { desc = 'Go to buffer 8' })
+nmap('<leader>9', function()
+  require('bufferline').go_to(9, true)
+end, { desc = 'Go to buffer 9' })
 
 -- Add Punctuation to end of line or line break
 nmap('<leader>;', '$a;<Esc>')
-nmap(
-  '<leader>,',
-  function()
-    vim.cmd.normal '$a,'
-  end
-)
+nmap('<leader>,', function()
+  vim.cmd.normal('$a,')
+end)
 
 -- Break line at cursor
 nmap('<leader><CR>', 'i<CR><Esc>')

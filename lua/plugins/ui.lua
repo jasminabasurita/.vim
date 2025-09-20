@@ -1,69 +1,4 @@
 return {
-  --- syntax highlighting
-  {
-    'nvim-treesitter/nvim-treesitter',
-    lazy = false,
-    branch = 'main',
-    build = function()
-      require('nvim-treesitter').install({
-        'bash',
-        'css',
-        'dockerfile',
-        'elixir',
-        'html',
-        'javascript',
-        'json',
-        'jsx',
-        'liquid',
-        'lua',
-        'markdown',
-        'python',
-        'query',
-        'regex',
-        'tsx',
-        'typescript',
-        'vim',
-        'yaml',
-      })
-      require('nvim-treesitter').update()
-    end,
-    config = function()
-      vim.api.nvim_create_autocmd('FileType', {
-        pattern = {
-          'bash',
-          'css',
-          'dockerfile',
-          'elixir',
-          'html',
-          'javascript',
-          'json',
-          'javascriptreact',
-          'liquid',
-          'lua',
-          'markdown',
-          'python',
-          'query',
-          'regex',
-          'typescriptreact',
-          'typescript',
-          'vim',
-          'yaml',
-        },
-        callback = function()
-          -- syntax highlighting, provided by Neovim
-          vim.treesitter.start()
-          -- folds, provided by Neovim
-          vim.wo.foldlevel = 9999999                          --default to all folds open
-          vim.wo.foldmethod = 'expr'                          --use a function to fold
-          vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()' --set treesitter as fold function
-          -- indentation, provided by nvim-treesitter
-          vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-        end,
-      })
-    end
-
-  },
-
   --- colorscheme
   {
     'dracula/vim',
@@ -94,13 +29,23 @@ return {
     dependencies = {
       'nvim-tree/nvim-web-devicons',
       'AndreM222/copilot-lualine',
+      'quentingruber/pomodoro.nvim',
     },
     opts = {
       sections = {
-        lualine_x = { { 'copilot', show_colors = true }, 'encoding', 'fileformat', 'filetype' },
+        lualine_x = {
+          { 'copilot', show_colors = true },
+          'encoding',
+          'fileformat',
+          'filetype',
+          function()
+            return require('pomodoro').get_pomodoro_status('🍅❌', '🍅', '☕')
+          end,
+        },
       },
     },
   },
+
   --- bufferline
   {
     'akinsho/bufferline.nvim',
@@ -112,7 +57,7 @@ return {
         diagnostics = 'nvim_lsp',
         diagnostics_indicator = function(count, level)
           local icon = level:match('error') and ' ' or (level:match('warning') and ' ' or ' ')
-          return " " .. icon .. count
+          return ' ' .. icon .. count
         end,
         numbers = 'ordinal',
       },
@@ -128,7 +73,7 @@ return {
     },
     opts = {
       indent = { highlight = 'DraculaSubtle' },
-      scope = { highlight = 'DraculaOrange' }
+      scope = { highlight = 'DraculaOrange' },
     },
   },
 
@@ -143,8 +88,12 @@ return {
       dashboard.section.header.val = require('assets.rat')
 
       dashboard.section.buttons.val = {
-        dashboard.button('o', '󰂺  > Open session for cwd', function() require("persistence").load() end),
-        dashboard.button('b', '󰂻  > Browse sessions', function() require("persistence").select() end),
+        dashboard.button('o', '󰂺  > Open session for cwd', function()
+          require('persistence').load()
+        end),
+        dashboard.button('b', '󰂻  > Browse sessions', function()
+          require('persistence').select()
+        end),
         dashboard.button('e', '  > New file', ':ene<cr>'),
         dashboard.button('f', '  > Find file', ':FzfLua files<cr>'),
         dashboard.button('t', '󰙅  > File tree', ':Neotree source=filesystem<cr>'),
@@ -160,7 +109,7 @@ return {
   --- markdown
   {
     'MeanderingProgrammer/render-markdown.nvim',
-    ft = { "markdown", "codecompanion" },
+    ft = { 'markdown', 'codecompanion' },
     dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
     ---@module 'render-markdown'
     ---@type render.md.UserConfig

@@ -7,16 +7,17 @@ return {
       suggestion = {
         auto_trigger = true,
         keymap = {
-          accept = "<C-j>",
-          accept_line = "<C-l>",
-          accept_word = "<C-k>",
+          accept = '<C-j>',
+          accept_line = '<C-l>',
+          accept_word = '<C-k>',
           -- next = "<C-n>",
           -- prev = "<M-[>",
-          dismiss = "<C-e>",
+          dismiss = '<C-e>',
         },
       },
     },
   },
+
   -- AI chat
   {
     'olimorris/codecompanion.nvim',
@@ -32,9 +33,9 @@ return {
         chat = {
           window = {
             width = 45,
-          }
-        }
-      }
+          },
+        },
+      },
     },
   },
 }
