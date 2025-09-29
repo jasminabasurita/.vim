@@ -12,4 +12,38 @@ return {
       display_ui_on_break = true, -- Disable it if you only want to see the lualine
     },
   },
+  {
+    'obsidian-nvim/obsidian.nvim',
+    version = '*',
+    lazy = true,
+    event = {
+      'BufReadPre ' .. vim.fn.expand('~') .. '/Documents/Obsidian Vault/*.md',
+      'BufNewFile ' .. vim.fn.expand('~') .. '/Documents/Obsidian Vault/*.md',
+    },
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'hrsh7th/nvim-cmp',
+      'ibhagwan/fzf-lua',
+      'nvim-treesitter/nvim-treesitter',
+      'MeanderingProgrammer/render-markdown.nvim',
+    },
+    ---@module 'obsidian'
+    ---@type obsidian.config
+    opts = {
+      workspaces = {
+        {
+          name = 'Obsidian Vault',
+          path = '~/Documents/Obsidian Vault',
+        },
+      },
+      picker = { name = 'fzf-lua' },
+      attachments = {
+        img_folder = '/assets',
+      },
+      ui = { enable = false },
+      checkbox = {
+        order = { ' ', '/', 'x', '-', '>', '<' },
+      },
+    },
+  },
 }

@@ -29,11 +29,18 @@ nmap('<leader>w', ':noh<cr>', { desc = 'Clear highlights' })
 nmap('<C-u>', 'viwUe', { desc = 'Capitalize word' })
 imap('<C-u>', '<esc>viwUea', { desc = 'Capitalize word' })
 
+--delete whole words in insert mode
+imap('<C-BS>', '<C-w>', { desc = 'Delete whole word in insert mode' })
+
 -- Easier split navigation
 nmap('<C-J>', '<C-W><C-J>', { desc = 'Move to split down' })
 nmap('<C-K>', '<C-W><C-K>', { desc = 'Move to split up' })
 nmap('<C-L>', '<C-W><C-L>', { desc = 'Move to split right' })
 nmap('<C-H>', '<C-W><C-H>', { desc = 'Move to split left' })
+
+-- Better navigation for wrapped lines
+nmap('j', 'v:count == 0 ? "gj" : "j"', { expr = true, desc = 'Move down' })
+nmap('k', 'v:count == 0 ? "gk" : "k"', { expr = true, desc = 'Move up' })
 
 -- Faster Navigation
 map({ 'n', 'v', 'o' }, 'H', '^', { desc = 'Move to start of line' })

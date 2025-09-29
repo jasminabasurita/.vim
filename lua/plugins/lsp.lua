@@ -31,7 +31,8 @@ return {
       require('mason-tool-installer').setup({
         ensure_installed = {
           'bash-language-server',
-          'prettierd',
+          'prettier',
+          'eslint_d',
           'markdownlint',
           'shellcheck',
           'shfmt',
@@ -187,10 +188,10 @@ return {
         includeInlayFunctionParameterTypeHints = true,
         includeInlayVariableTypeHints = true,
         includePropertyDeclarationTypeHints = true,
-        includeInlayEnumMemberValueHints = false,                      -- default
-        includeInlayParameterNameHints = 'none',                       -- default, can be 'none' | 'literals' | 'all'
+        includeInlayEnumMemberValueHints = false, -- default
+        includeInlayParameterNameHints = 'none', -- default, can be 'none' | 'literals' | 'all'
         includeInlayParameterNameHintsWhenArgumentMatchesName = false, -- default
-        includeInlayVariableTypeHintsWhenTypeMatchesName = false,      -- default
+        includeInlayVariableTypeHintsWhenTypeMatchesName = false, -- default
       }
 
       vim.lsp.config('ts_ls', {
@@ -258,20 +259,21 @@ return {
         timeout_ms = 500,
       },
       default_format_opts = {
-        lsp_format = 'last',
+        lsp_format = 'fallback',
       },
       formatters_by_ft = {
-        typescript = { 'prettierd' },
-        typescriptreact = { 'prettierd' },
-        javascript = { 'prettierd' },
-        javascriptreact = { 'prettierd' },
-        css = { 'prettierd' },
-        scss = { 'prettierd' },
-        html = { 'prettierd' },
-        json = { 'prettierd' },
-        lua = { 'stylua', 'lua_ls' },
-        sh = { 'shfmt' },
-        markdown = { 'prettierd', 'markdownlint' },
+        typescript = { 'prettier', 'eslint_d' },
+        typescriptreact = { 'prettier', 'eslint_d' },
+        javascript = { 'prettier', 'eslint_d' },
+        javascriptreact = { 'prettier', 'eslint_d' },
+        css = { 'prettier' },
+        scss = { 'prettier' },
+        html = { 'prettier' },
+        json = { 'prettier' },
+        yaml = { 'prettier' },
+        lua = { 'stylua' },
+        sh = { 'shfmt', 'prettier' },
+        markdown = { 'prettier' },
       },
     },
   },

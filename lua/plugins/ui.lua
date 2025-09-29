@@ -3,16 +3,56 @@ return {
   {
     'dracula/vim',
     name = 'dracula',
+    enabled = false,
     lazy = false,
     priority = 1000,
     config = function()
       vim.cmd([[
         colorscheme dracula
-        highlight Normal ctermbg=NONE
-        highlight NonText ctermbg=NONE guifg='#ABB2BF' gui=italic
-        highlight Comment ctermbg=NONE guifg='#6272A4' gui=italic
-        highlight Difftext ctermbg=NONE guibg=NONE
+        highlight NonText guifg='#ABB2BF' gui=italic
+        highlight DraculaCommentItalic ctermfg='61' guifg='#6272a4' gui=italic cterm=italic
+        highlight DraculaCommentStrikethrough ctermfg='61' guifg='#6272a4' gui=strikethrough cterm=strikethrough
+        highlight! link Comment DraculaCommentItalic
+        "highlight Difftext ctermbg=NONE guibg=NONE
       ]])
+    end,
+  },
+  {
+    'catppuccin/nvim',
+    enabled = false,
+    name = 'catppuccin',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme('catppuccin-mocha')
+    end,
+  },
+  {
+    'rose-pine/neovim',
+    enabled = true,
+    name = 'rose-pine',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.cmd('colorscheme rose-pine-moon')
+    end,
+  },
+  {
+    'Mofiqul/dracula.nvim',
+    enabled = false,
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme('dracula')
+    end,
+  },
+  {
+    'folke/tokyonight.nvim',
+    enabled = false,
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme('tokyonight-storm')
     end,
   },
 
@@ -72,8 +112,8 @@ return {
       'nvim-treesitter/nvim-treesitter',
     },
     opts = {
-      indent = { highlight = 'DraculaSubtle' },
-      scope = { highlight = 'DraculaOrange' },
+      -- indent = { highlight = 'DraculaSubtle' },
+      -- scope = { highlight = 'DraculaOrange' },
     },
   },
 
@@ -110,12 +150,70 @@ return {
   {
     'MeanderingProgrammer/render-markdown.nvim',
     ft = { 'markdown', 'codecompanion' },
-    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
     ---@module 'render-markdown'
     ---@type render.md.UserConfig
     opts = {
       completions = {
         lsp = { enabled = true },
+      },
+      checkbox = {
+        checked = { highlight = 'Comment', scope_highlight = 'Comment' },
+        custom = {
+          -- adding checkbox support for Obsidian Multi State CheckBox Switcher
+          -- basic
+          incomplete = { raw = '[/]', rendered = '󱎖 ', highlight = 'DraculaPink' },
+          canceled = {
+            raw = '[-]',
+            rendered = '󰍵 ',
+            highlight = 'DraculaComment',
+            scope_highlight = 'DraculaCommentStrikethrough',
+          },
+          forwarded = { raw = '[>]', rendered = '󰒊 ', highlight = 'DraculaPurple' },
+          scheduling = { raw = '[<]', rendered = ' ', highlight = 'DraculaPurple' },
+          -- extras
+          question = { raw = '[?]', rendered = ' ', highlight = 'DraculaYellow' },
+          important = { raw = '[!]', rendered = ' ', highlight = 'DraculaOrange' },
+          star = { raw = '[*]', rendered = '󰓎 ', highlight = 'DraculaYellow' },
+          quote = { raw = '["]', rendered = ' ', highlight = 'DraculaCyan' },
+          location = { raw = '[l]', rendered = ' ', highlight = 'DraculaRed' },
+          bookmark = { raw = '[b]', rendered = '󰃀 ', highlight = 'DraculaOrange' },
+          information = { raw = '[i]', rendered = '󰙎 ', highlight = 'DraculaPink' },
+          savings = { raw = '[s]', rendered = ' ', highlight = 'DraculaGreen' },
+          idea = { raw = '[I]', rendered = '󰛨 ', highlight = 'DraculaYellow' },
+          pros = { raw = '[p]', rendered = ' ', highlight = 'DraculaGreen' },
+          cons = { raw = '[c]', rendered = ' ', highlight = 'DraculaOrange' },
+          fire = { raw = '[f]', rendered = '󰈸 ', highlight = 'DraculaRed' },
+          key = { raw = '[k]', rendered = ' ', highlight = 'DraculaYellow' },
+          win = { raw = '[w]', rendered = ' ', highlight = 'DraculaPurple' },
+          up = { raw = '[u]', rendered = '󰔵 ', highlight = 'DraculaGreen' },
+          down = { raw = '[d]', rendered = '󰔳 ', highlight = 'DraculaRed' },
+          todo = { raw = '[t]' },
+        },
+      },
+    },
+  },
+
+  -- lazy.nvim
+  {
+    'folke/snacks.nvim',
+    ---@module 'snacks'
+    ---@type snacks.Config
+    opts = {
+      statuscolumn = {
+        enabled = true,
+        folds = {
+          open = true,
+          git_hl = true,
+        },
+      },
+      image = {
+        backend = 'kitty',
+        resolve = function(path, src)
+          if require('obsidian.api').path_is_note(path) then
+            return require('obsidian.api').resolve_image_path(src)
+          end
+        end,
       },
     },
   },

@@ -17,6 +17,7 @@ return {
         'liquid',
         'lua',
         'markdown',
+        'markdown_inline',
         'python',
         'query',
         'regex',
@@ -41,6 +42,7 @@ return {
           'liquid',
           'lua',
           'markdown',
+          'markdown_inline',
           'python',
           'query',
           'regex',
@@ -53,8 +55,8 @@ return {
           -- syntax highlighting, provided by Neovim
           vim.treesitter.start()
           -- folds, provided by Neovim
-          vim.wo.foldlevel = 9999999                          --default to all folds open
-          vim.wo.foldmethod = 'expr'                          --use a function to fold
+          vim.wo.foldlevel = 9999999 --default to all folds open
+          vim.wo.foldmethod = 'expr' --use a function to fold
           vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()' --set treesitter as fold function
           -- indentation, provided by nvim-treesitter
           vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"

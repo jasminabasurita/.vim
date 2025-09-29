@@ -2,7 +2,7 @@
 
 :warning:I've been in the process of fully migrating to lua for my configs. This config is very much a WIP now:warning:
 
-### My Key Mappings
+## My Key Mappings
 
 |      Keys      |        What they do         |
 | :------------: | :-------------------------: |
@@ -18,8 +18,8 @@
 |   `leader+)`   |         add closing parren after cursor         |
 |   `leader+"`   |         add double quote after cursor         |
 |   `leader+'`   |         add single quote after cursor         |
-|   `leader+rc`   |        surround visual selection in a _react comment_ (i.e. {/* your comment here */})         |
-|   `leader+/`   |        surround visual selection in an inline js comment /* */         |
+|   `leader+rc`   |        surround visual selection in a _react comment_ (i.e. {/*your comment here*/})         |
+|   `leader+/`   |        surround visual selection in an inline js comment /**/         |
 |    `Ctrl+H`    |     Switch to left tile     |
 |    `Ctrl+L`    |    Switch to right tile     |
 |    `Ctrl+J`    |    Switch to bottom tile    |
@@ -37,13 +37,14 @@
 |   `jk`    |         exit insert mode          |
 |   `Ctrl+U`    |         capitalize word          |
 
-### Usage
+## Usage
 
-1.  clone to user home
-2.  cd into this repo
-3.  run `./link.sh`
-4.  enjoy!
+1. clone to user home
+2. cd into this repo
+3. run `./link.sh`
+4. enjoy!
 
-#### Vim Usage
+### Vim Usage
+
 1. checkout the `vim` branch
 1. run `./init.sh`
