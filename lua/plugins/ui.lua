@@ -1,33 +1,6 @@
 return {
   --- colorscheme
   {
-    'dracula/vim',
-    name = 'dracula',
-    enabled = false,
-    lazy = false,
-    priority = 1000,
-    config = function()
-      vim.cmd([[
-        colorscheme dracula
-        highlight NonText guifg='#ABB2BF' gui=italic
-        highlight DraculaCommentItalic ctermfg='61' guifg='#6272a4' gui=italic cterm=italic
-        highlight DraculaCommentStrikethrough ctermfg='61' guifg='#6272a4' gui=strikethrough cterm=strikethrough
-        highlight! link Comment DraculaCommentItalic
-        "highlight Difftext ctermbg=NONE guibg=NONE
-      ]])
-    end,
-  },
-  {
-    'catppuccin/nvim',
-    enabled = false,
-    name = 'catppuccin',
-    lazy = false,
-    priority = 1000,
-    config = function()
-      vim.cmd.colorscheme('catppuccin-mocha')
-    end,
-  },
-  {
     'rose-pine/neovim',
     enabled = true,
     name = 'rose-pine',
@@ -44,15 +17,6 @@ return {
     priority = 1000,
     config = function()
       vim.cmd.colorscheme('dracula')
-    end,
-  },
-  {
-    'folke/tokyonight.nvim',
-    enabled = false,
-    lazy = false,
-    priority = 1000,
-    config = function()
-      vim.cmd.colorscheme('tokyonight-storm')
     end,
   },
 
@@ -162,32 +126,32 @@ return {
         custom = {
           -- adding checkbox support for Obsidian Multi State CheckBox Switcher
           -- basic
-          incomplete = { raw = '[/]', rendered = '󱎖 ', highlight = 'DraculaPink' },
+          incomplete = { raw = '[/]', rendered = '󱎖 ', highlight = 'DiagnosticInfo' },
           canceled = {
             raw = '[-]',
             rendered = '󰍵 ',
-            highlight = 'DraculaComment',
-            scope_highlight = 'DraculaCommentStrikethrough',
+            highlight = 'Comment',
+            scope_highlight = '@text.strike',
           },
-          forwarded = { raw = '[>]', rendered = '󰒊 ', highlight = 'DraculaPurple' },
-          scheduling = { raw = '[<]', rendered = ' ', highlight = 'DraculaPurple' },
+          forwarded = { raw = '[>]', rendered = '󰒊 ', highlight = 'DiagnosticHint' },
+          scheduling = { raw = '[<]', rendered = ' ', highlight = 'DiagnosticInfo' },
           -- extras
-          question = { raw = '[?]', rendered = ' ', highlight = 'DraculaYellow' },
-          important = { raw = '[!]', rendered = ' ', highlight = 'DraculaOrange' },
-          star = { raw = '[*]', rendered = '󰓎 ', highlight = 'DraculaYellow' },
-          quote = { raw = '["]', rendered = ' ', highlight = 'DraculaCyan' },
-          location = { raw = '[l]', rendered = ' ', highlight = 'DraculaRed' },
-          bookmark = { raw = '[b]', rendered = '󰃀 ', highlight = 'DraculaOrange' },
-          information = { raw = '[i]', rendered = '󰙎 ', highlight = 'DraculaPink' },
-          savings = { raw = '[s]', rendered = ' ', highlight = 'DraculaGreen' },
-          idea = { raw = '[I]', rendered = '󰛨 ', highlight = 'DraculaYellow' },
-          pros = { raw = '[p]', rendered = ' ', highlight = 'DraculaGreen' },
-          cons = { raw = '[c]', rendered = ' ', highlight = 'DraculaOrange' },
-          fire = { raw = '[f]', rendered = '󰈸 ', highlight = 'DraculaRed' },
-          key = { raw = '[k]', rendered = ' ', highlight = 'DraculaYellow' },
-          win = { raw = '[w]', rendered = ' ', highlight = 'DraculaPurple' },
-          up = { raw = '[u]', rendered = '󰔵 ', highlight = 'DraculaGreen' },
-          down = { raw = '[d]', rendered = '󰔳 ', highlight = 'DraculaRed' },
+          question = { raw = '[?]', rendered = ' ', highlight = 'DiagnosticError' },
+          important = { raw = '[!]', rendered = ' ', highlight = 'DiagnosticWarn' },
+          star = { raw = '[*]', rendered = '󰓎 ', highlight = 'DiagnosticWarn' },
+          quote = { raw = '["]', rendered = ' ', highlight = 'DiagnosticInfo' },
+          location = { raw = '[l]', rendered = ' ', highlight = 'DiagnosticError' },
+          bookmark = { raw = '[b]', rendered = '󰃀 ', highlight = 'DiagnosticOk' },
+          information = { raw = '[i]', rendered = '󰙎 ', highlight = 'DiagnosticInfo' },
+          savings = { raw = '[s]', rendered = ' ', highlight = 'DiagnosticOk' },
+          idea = { raw = '[I]', rendered = '󰛨 ', highlight = 'DiagnosticWarn' },
+          pros = { raw = '[p]', rendered = ' ', highlight = 'DiagnosticOk' },
+          cons = { raw = '[c]', rendered = ' ', highlight = 'DiagnosticError' },
+          fire = { raw = '[f]', rendered = '󰈸 ', highlight = 'DiagnosticError' },
+          key = { raw = '[k]', rendered = ' ', highlight = 'DiagnosticWarn' },
+          win = { raw = '[w]', rendered = ' ', highlight = 'DiagnosticHint' },
+          up = { raw = '[u]', rendered = '󰔵 ', highlight = 'DiagnosticOk' },
+          down = { raw = '[d]', rendered = '󰔳 ', highlight = 'DiagnosticError' },
           todo = { raw = '[t]' },
         },
       },

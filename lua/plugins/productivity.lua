@@ -13,9 +13,14 @@ return {
     },
   },
   {
+    'oliver-hughes/md-list.nvim',
+    opts = {},
+  },
+  {
     'obsidian-nvim/obsidian.nvim',
     version = '*',
     lazy = true,
+    cmd = 'Obsidian',
     event = {
       'BufReadPre ' .. vim.fn.expand('~') .. '/Documents/Obsidian Vault/*.md',
       'BufNewFile ' .. vim.fn.expand('~') .. '/Documents/Obsidian Vault/*.md',
@@ -44,6 +49,15 @@ return {
       checkbox = {
         order = { ' ', '/', 'x', '-', '>', '<' },
       },
+      legacy_commands = false,
+      templates = {
+        folder = '05 - Templates',
+      },
+      daily_notes = {
+        folder = '02 - Dailies',
+        template = 'Daily',
+      },
+      disable_frontmatter = true,
     },
   },
 }
