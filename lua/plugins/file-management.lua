@@ -44,6 +44,13 @@ return {
       { '<c-g>', '<cmd>FzfLua live_grep<cr>', silent = true },
       { '<leader>r', '<cmd>FzfLua resume<cr>', silent = true },
       { '<leader>sh', '<cmd>FzfLua helptags<cr>', silent = true, desc = 'Search help tags' },
+      {
+        'grr',
+        function()
+          require('fzf-lua').lsp_references()
+        end,
+        { desc = 'List all references' },
+      },
     },
     opts = {},
   },

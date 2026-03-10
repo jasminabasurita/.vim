@@ -23,6 +23,7 @@ return {
           'eslint',
           'html',
           'jsonls',
+          'just',
           'lua_ls',
           'ts_ls',
         },
@@ -108,20 +109,13 @@ return {
         end,
         { desc = 'List code actions' },
       },
-      {
-        'gd',
-        function()
-          vim.lsp.buf.definition()
-        end,
-        { desc = 'Goto definition' },
-      },
-      {
-        'gD',
-        function()
-          vim.lsp.buf.declaration()
-        end,
-        { desc = 'Goto declaration' },
-      },
+      -- {
+      --   'gD',
+      --   function()
+      --     vim.lsp.buf.declaration()
+      --   end,
+      --   { desc = 'Goto declaration' },
+      -- },
       {
         'gi',
         function()
@@ -135,13 +129,6 @@ return {
           vim.lsp.buf.type_definition()
         end,
         { desc = 'Goto type definition' },
-      },
-      {
-        'gr',
-        function()
-          vim.lsp.buf.references()
-        end,
-        { desc = 'List all references' },
       },
       {
         'gs',
@@ -249,14 +236,14 @@ return {
       {
         '<c-f>',
         function()
-          require('conform').format()
+          require('conform').format({ async = true })
         end,
         { desc = 'Format current buffer' },
       },
     },
     opts = {
       format_on_save = {
-        timeout_ms = 500,
+        timeout_ms = 1000,
       },
       default_format_opts = {
         lsp_format = 'fallback',
@@ -271,9 +258,15 @@ return {
         html = { 'prettier' },
         json = { 'prettier' },
         yaml = { 'prettier' },
+        liquid = { 'prettier' },
         lua = { 'stylua' },
         sh = { 'shfmt', 'prettier' },
         markdown = { 'prettier' },
+      },
+      formatters = {
+        prettier = {
+          require_cwd = true, --config working directory. Must have config in project
+        },
       },
     },
   },

@@ -57,7 +57,7 @@ return {
         folder = '02 - Dailies',
         template = 'Daily',
       },
-      disable_frontmatter = true,
+      frontmatter = { enabled = false },
     },
   },
 }

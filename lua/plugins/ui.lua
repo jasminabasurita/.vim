@@ -98,6 +98,7 @@ return {
         dashboard.button('b', '󰂻  > Browse sessions', function()
           require('persistence').select()
         end),
+        dashboard.button('d', '  > Open git diff for project', ':DiffviewOpen<cr>'),
         dashboard.button('e', '  > New file', ':ene<cr>'),
         dashboard.button('f', '  > Find file', ':FzfLua files<cr>'),
         dashboard.button('t', '󰙅  > File tree', ':Neotree source=filesystem<cr>'),
@@ -171,14 +172,14 @@ return {
           git_hl = true,
         },
       },
-      image = {
-        backend = 'kitty',
-        resolve = function(path, src)
-          if require('obsidian.api').path_is_note(path) then
-            return require('obsidian.api').resolve_image_path(src)
-          end
-        end,
-      },
+      -- image = {
+      --   backend = 'kitty',
+      --   resolve = function(path, src)
+      --     if require('obsidian.api').path_is_note(path) then
+      --       return require('obsidian.api').resolve_image_path(src)
+      --     end
+      --   end,
+      -- },
     },
   },
 }
